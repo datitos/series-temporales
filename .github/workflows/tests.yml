@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Tests
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the develop branch
@@ -24,7 +24,7 @@ jobs:
 
       # TODO: put setup instructions here
       - name: Fix me!
-        run: Fix me now!
+        run: echo Fix me now!
 
       # TODO: run tests here!
       - name: Fix me to!
