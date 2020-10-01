@@ -1,4 +1,9 @@
 # Series temporales
+![python](https://img.shields.io/badge/python-3.6-informational)
+![pip](https://img.shields.io/badge/pypi%20package-0.23.2-success)
+![team](https://img.shields.io/badge/contributors-4-blue)
+
+
 ![portada](https://derrickmartins.files.wordpress.com/2015/11/time-series-analysis.png)
 
 Series temporales es un paquete de Python que contiene herramientas de preprocesado de series temporales, modelado de series temporales con técnicas de Machine Learning/Deep Learning/modelos clásicos y herramientas para el testeo de las mismas. 
