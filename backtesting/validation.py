@@ -87,7 +87,7 @@ def cv_generator(data, cutoffs, window_size):
 
     for cutoff in cutoffs:
 
-      train_df = data[:cutoff]
-      val_df = data[cutoff:cutoff + window_size]
+        train_df = data[:cutoff]
+        val_df = data[cutoff:cutoff + window_size]
 
-      yield (train_df, val_df)
+        yield (train_df, val_df)
