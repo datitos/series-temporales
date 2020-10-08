@@ -88,7 +88,6 @@ def cv_generator(data, cutoffs, window_size):
     -------
     generator that returns the tuple (train_df, val_df)
     """
-    results = {}
 
     for cutoff in cutoffs:
 
