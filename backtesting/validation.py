@@ -1,11 +1,14 @@
 import pandas as pd
 
-def cv_cutoffs(execution_date, steps, window_size, step_size):
+def cv_cutoffs(last_date, steps, window_size, step_size):
     """
+    Returns a list with the cutoff dates,
+    calculated backwards since last_date.
+
     Parameters
     ----------
-    execution_date : pd.Timestamp
-        Last day of validation.
+    last_date : pd.Timestamp
+        Last validation day.
 
     steps : int
         Number of folds.
@@ -38,6 +41,9 @@ def cv_cutoffs(execution_date, steps, window_size, step_size):
 
 def cv_cutoffs_v2(first_val_day, steps, step_size):
     """
+    Returns a list with the cutoff dates,
+    calculated forwards since last_date.
+
     Parameters
     ----------
     first_val_day : pd.Timestamp
@@ -66,6 +72,9 @@ def cv_cutoffs_v2(first_val_day, steps, step_size):
 
 def cv_generator(data, cutoffs, window_size):
     """
+    Returns a generator that returns train
+    and validation dataframes for each cutoff.
+
     Parameters
     ----------
     data : pd.DataFrame
@@ -82,7 +91,7 @@ def cv_generator(data, cutoffs, window_size):
 
     Returns
     -------
-    generator that returns the tuple (train_df, val_df)
+    generator
     """
 
     for cutoff in cutoffs:
