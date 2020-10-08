@@ -1,11 +1,14 @@
 import pandas as pd
 
-def cv_cutoffs(execution_date, steps, window_size, step_size):
+def cv_cutoffs(last_date, steps, window_size, step_size):
     """
+    Returns a list with the cutoff dates,
+    calculated backwards since last_date.
+
     Parameters
     ----------
-    execution_date : pd.Timestamp
-        Last day of validation.
+    last_date : pd.Timestamp
+        Last validation day.
 
     steps : int
         Number of folds.
@@ -22,7 +25,7 @@ def cv_cutoffs(execution_date, steps, window_size, step_size):
         List containing cutoff dates
     """
     cutoffs = []
-    cutoff = execution_date
+    cutoff = last_date
 
     for step in range(steps):
         if step == 0:
@@ -38,6 +41,9 @@ def cv_cutoffs(execution_date, steps, window_size, step_size):
 
 def cv_cutoffs_v2(first_val_day, steps, step_size):
     """
+    Returns a list with the cutoff dates,
+    calculated forwards since last_date.
+
     Parameters
     ----------
     first_val_day : pd.Timestamp
@@ -58,18 +64,17 @@ def cv_cutoffs_v2(first_val_day, steps, step_size):
     cutoffs = [first_val_day]
     cutoff = first_val_day
 
-    if steps == 0:
-      return cutoffs
+    for step in range(steps - 1):
+        cutoff += step_size
+        cutoffs.append(cutoff)
 
-    else:
-      for step in range(steps - 1):
-          cutoff += step_size
-          cutoffs.append(cutoff)
-
-      return cutoffs
+    return cutoffs
 
 def cv_generator(data, cutoffs, window_size):
     """
+    Returns a generator that returns train
+    and validation dataframes for each cutoff.
+
     Parameters
     ----------
     data : pd.DataFrame
@@ -86,17 +91,12 @@ def cv_generator(data, cutoffs, window_size):
 
     Returns
     -------
-    generator that returns the tuple (train_df, val_df)
+    generator
     """
-    results = {}
 
     for cutoff in cutoffs:
 
-      train_df = data[:cutoff]
-
-      if cutoff + window_size in data.index:
+        train_df = data[:cutoff]
         val_df = data[cutoff:cutoff + window_size]
-      else:
-        val_df = data[cutoff:]
 
-      yield (train_df, val_df)
+        yield (train_df, val_df)
