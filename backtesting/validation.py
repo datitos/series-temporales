@@ -25,7 +25,7 @@ def cv_cutoffs(last_date, steps, window_size, step_size):
         List containing cutoff dates
     """
     cutoffs = []
-    cutoff = execution_date
+    cutoff = last_date
 
     for step in range(steps):
         if step == 0:
