@@ -58,15 +58,11 @@ def cv_cutoffs_v2(first_val_day, steps, step_size):
     cutoffs = [first_val_day]
     cutoff = first_val_day
 
-    if steps == 0:
-      return cutoffs
+    for step in range(steps - 1):
+        cutoff += step_size
+        cutoffs.append(cutoff)
 
-    else:
-      for step in range(steps - 1):
-          cutoff += step_size
-          cutoffs.append(cutoff)
-
-      return cutoffs
+    return cutoffs
 
 def cv_generator(data, cutoffs, window_size):
     """
